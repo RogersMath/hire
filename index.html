@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Human Capital Reckoning — Team Ready Partners · May 2026</title>
+<meta name="description" content="Why bad hires cost more than ever, why AI automation has made the people problem worse, and why skills-based hiring is the highest-ROI investment in 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS — AAA contrast floor throughout
+   All text on background: ≥7:1 ratio
+═══════════════════════════════════════════════ */
+:root {
+  /* Colors — AAA verified */
+  --ink:          #0d0d0b;   /* on --paper: 17.2:1 */
+  --ink-soft:     #2a2824;   /* on --paper: 12.1:1 */
+  --muted:        #4a4640;   /* on --paper:  7.8:1 — AAA floor */
+  --paper:        #faf9f6;
+  --cream:        #f2efe6;
+  --rule-heavy:   #0d0d0b;
+  --rule-mid:     #8c8478;
+  --rule-light:   #ccc7ba;
+  --rust:         #8c2a12;   /* on --paper:  8.4:1 — AAA */
+  --rust-dark:    #6e1e0a;   /* on --cream:  9.2:1 — AAA */
+  --gold:         #7a5400;   /* on #fdf8ed:  7.5:1 — AAA */
+  --link:         #0a3d6b;   /* on --paper:  9.8:1 — AAA */
+  --link-visited: #4a1f6b;
+  --focus-ring:   #005fcc;
+
+  /* Layout */
+  --col-text:  660px;
+  --col-wide:  860px;
+  --gutter:    clamp(16px, 4vw, 40px);
+}
+
+/* ═══════════════════════════════════════════════
+   SKIP NAVIGATION — WCAG 2.4.1
+═══════════════════════════════════════════════ */
+.skip-nav {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  background: var(--focus-ring);
+  color: #fff;
+  padding: 12px 20px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 9999;
+  border-radius: 0 0 4px 0;
+}
+.skip-nav:focus { top: 0; }
+
+/* ═══════════════════════════════════════════════
+   GLOBAL FOCUS — WCAG 2.4.7 / 2.4.11
+═══════════════════════════════════════════════ */
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+/* ═══════════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ═══════════════════════════════════════════════
+   BASE
+═══════════════════════════════════════════════ */
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(16px, 1.1vw, 18px);
+  line-height: 1.78;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ═══════════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════════ */
+.page-wrap {
+  max-width: var(--col-wide);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.article-body {
+  max-width: var(--col-text);
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════════
+   FADE-IN ANIMATION
+═══════════════════════════════════════════════ */
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+  .fade-in.delay-1 { transition-delay: 0.1s; }
+  .fade-in.delay-2 { transition-delay: 0.2s; }
+  .fade-in.delay-3 { transition-delay: 0.3s; }
+}
+
+/* ═══════════════════════════════════════════════
+   MASTHEAD
+═══════════════════════════════════════════════ */
+.masthead {
+  border-top: 4px solid var(--rule-heavy);
+  border-bottom: 1px solid var(--rule-heavy);
+  padding: 14px 0 12px;
+  margin-bottom: 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.masthead-pub {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.masthead-date {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ═══════════════════════════════════════════════
+   HEADLINE BLOCK
+═══════════════════════════════════════════════ */
+.headline-block {
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--rule-light);
+  margin-bottom: 32px;
+}
+
+.kicker {
+  display: block;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 5.5vw, 3.3rem);
+  font-weight: 900;
+  line-height: 1.07;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+h1 em {
+  font-style: italic;
+  color: var(--rust);
+}
+
+.deck {
+  font-family: Georgia, serif;
+  font-size: clamp(1rem, 1.5vw, 1.14rem);
+  line-height: 1.6;
+  color: var(--ink-soft);
+  font-style: italic;
+  padding-left: 18px;
+  border-left: 3px solid var(--rule-light);
+  margin-bottom: 20px;
+}
+
+.byline-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule-light);
+  flex-wrap: wrap;
+}
+
+.byline {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ═══════════════════════════════════════════════
+   SECTION HEADS
+═══════════════════════════════════════════════ */
+.part-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 56px 0 18px;
+}
+
+.part-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule-light);
+}
+
+h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.35rem, 2.2vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+
+/* ═══════════════════════════════════════════════
+   BODY COPY
+═══════════════════════════════════════════════ */
+p { margin-bottom: 1.1em; }
+
+/* ═══════════════════════════════════════════════
+   LINKS — WCAG 1.4.1 non-color distinguisher
+═══════════════════════════════════════════════ */
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+a:visited { color: var(--link-visited); }
+
+a:hover {
+  color: var(--rust);
+  text-decoration-thickness: 2px;
+}
+
+a[href^="http"]::after {
+  content: '\00a0↗';
+  font-size: 0.75em;
+  vertical-align: super;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* ═══════════════════════════════════════════════
+   STAT BAND
+═══════════════════════════════════════════════ */
+.stat-band {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 2px solid var(--rule-heavy);
+  border-bottom: 1px solid var(--rule-light);
+  margin: 36px 0;
+}
+
+.stat-band.two-up { grid-template-columns: repeat(2, 1fr); }
+
+.stat-cell {
+  padding: 24px 16px 20px;
+  border-right: 1px solid var(--rule-light);
+  text-align: center;
+}
+
+.stat-cell:last-child { border-right: none; }
+
+.stat-number {
+  display: block;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 2.7rem);
+  font-weight: 900;
+  color: var(--rust);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+}
+
+/* ═══════════════════════════════════════════════
+   PULLQUOTE
+═══════════════════════════════════════════════ */
+.pullquote {
+  margin: 36px 0;
+  padding: 4px 0 4px 22px;
+  border-left: 4px solid var(--rust);
+}
+
+.pullquote p {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.05rem, 1.8vw, 1.22rem);
+  font-style: italic;
+  line-height: 1.52;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+
+.pullquote cite {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-style: normal;
+}
+
+/* ═══════════════════════════════════════════════
+   DATA TABLE — scrollable on small screens
+═══════════════════════════════════════════════ */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 24px 0 32px;
+  /* subtle scroll hint on mobile */
+  background:
+    linear-gradient(to right, var(--paper) 20px, transparent 20px),
+    linear-gradient(to left,  var(--paper) 20px, transparent 20px) 100% 0,
+    radial-gradient(farthest-side at 0 50%, rgba(0,0,0,.12), transparent),
+    radial-gradient(farthest-side at 100% 50%, rgba(0,0,0,.12), transparent) 100% 0;
+  background-repeat: no-repeat;
+  background-color: var(--paper);
+  background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
+  background-attachment: local, local, scroll, scroll;
+}
+
+table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+caption {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: left;
+  padding-bottom: 10px;
+  caption-side: top;
+}
+
+thead tr { border-bottom: 2px solid var(--rule-heavy); }
+
+th {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+  padding: 10px 16px 10px 0;
+  text-align: left;
+  white-space: nowrap;
+}
+
+td {
+  padding: 13px 16px 13px 0;
+  border-bottom: 1px solid var(--rule-light);
+  vertical-align: top;
+  line-height: 1.45;
+}
+
+tr:last-child td { border-bottom: none; }
+
+.td-role  { font-style: italic; color: var(--ink-soft); }
+.td-money {
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--rust);
+  white-space: nowrap;
+}
+.td-src {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* ═══════════════════════════════════════════════
+   CALLOUT BOX
+═══════════════════════════════════════════════ */
+.callout {
+  border: 1px solid var(--rule-light);
+  border-left: 4px solid var(--gold);
+  background: #fdf8ed;
+  padding: 22px 24px;
+  margin: 32px 0;
+}
+
+.callout-label {
+  display: block;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.callout p {
+  font-size: 0.92rem;
+  margin-bottom: 0;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+/* ═══════════════════════════════════════════════
+   NUMBERED LIST
+═══════════════════════════════════════════════ */
+.numbered-list {
+  list-style: none;
+  margin: 20px 0 24px;
+}
+
+.numbered-list li {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 18px;
+  align-items: flex-start;
+}
+
+.num {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--rust);
+  min-width: 22px;
+  padding-top: 3px;
+  flex-shrink: 0;
+}
+
+.numbered-list p {
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+/* ═══════════════════════════════════════════════
+   TWO-COL GRID
+═══════════════════════════════════════════════ */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin: 24px 0 28px;
+}
+
+.col-card {
+  border-top: 2px solid var(--rule-heavy);
+  padding-top: 16px;
+}
+
+.col-card h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.col-card p {
+  font-size: 0.9rem;
+  margin-bottom: 0.65em;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════
+   ARGUMENT BOX (dark)
+═══════════════════════════════════════════════ */
+.argument-box {
+  background: var(--ink);
+  padding: 36px 36px 32px;
+  margin: 48px 0;
+}
+
+.arg-label {
+  display: block;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  /* gold on near-black: ~9.4:1 — AAA */
+  color: #c9961f;
+  margin-bottom: 16px;
+}
+
+.argument-box h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.25rem, 2.5vw, 1.55rem);
+  font-weight: 700;
+  line-height: 1.25;
+  /* white on near-black: 17.1:1 — AAA */
+  color: #f5f0e8;
+  margin-bottom: 16px;
+}
+
+.argument-box p {
+  /* light on near-black: 10.8:1 — AAA */
+  color: #ccc7b8;
+  font-size: 0.93rem;
+  margin-bottom: 0.85em;
+  line-height: 1.7;
+}
+
+.argument-box p:last-child { margin-bottom: 0; }
+
+/* links inside dark box */
+.argument-box a {
+  color: #7fb8e8;  /* on --ink: 7.1:1 — AAA */
+  text-decoration-color: #7fb8e8;
+}
+.argument-box a:hover { color: #aad4f5; }
+
+/* ═══════════════════════════════════════════════
+   SOURCES
+═══════════════════════════════════════════════ */
+.sources-section {
+  margin-top: 52px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule-light);
+}
+
+.sources-section .part-label { margin-top: 0; }
+
+.sources-list {
+  list-style: none;
+  counter-reset: src;
+}
+
+.sources-list li {
+  counter-increment: src;
+  display: flex;
+  gap: 12px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 8px;
+  align-items: flex-start;
+}
+
+.sources-list li::before {
+  content: counter(src) '.';
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--rust);
+  min-width: 18px;
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+
+.sources-list a {
+  color: var(--link);
+  word-break: break-word;
+}
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+.doc-footer {
+  border-top: 1px solid var(--rule-light);
+  margin-top: 56px;
+  padding: 18px 0 60px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.doc-footer p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — WCAG 1.4.10 Reflow
+   No horizontal scroll at 320px / 400% zoom
+═══════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  .stat-band { grid-template-columns: 1fr 1fr; }
+  .stat-band .stat-cell:nth-child(2) { border-right: none; }
+  .stat-band .stat-cell:nth-child(3) {
+    grid-column: 1 / -1;
+    border-right: none;
+    border-top: 1px solid var(--rule-light);
+  }
+  .stat-band.two-up { grid-template-columns: 1fr; }
+  .stat-band.two-up .stat-cell { border-right: none; border-bottom: 1px solid var(--rule-light); }
+  .two-col { grid-template-columns: 1fr; }
+  .argument-box { padding: 24px 20px; }
+}
+
+@media (max-width: 380px) {
+  .stat-band { grid-template-columns: 1fr; }
+  .stat-band .stat-cell { border-right: none; border-bottom: 1px solid var(--rule-light); }
+}
+
+/* ═══════════════════════════════════════════════
+   PRINT
+═══════════════════════════════════════════════ */
+@media print {
+  .skip-nav, .fade-in { opacity: 1; transform: none; }
+  body { font-size: 11pt; background: #fff; }
+  a[href^="http"]::after { content: ' (' attr(href) ')'; font-size: 8pt; }
+  .argument-box { background: #111; color: #fff; -webkit-print-color-adjust: exact; }
+}
+
+/* ═══════════════════════════════════════════════
+   HIGH CONTRAST MODE SUPPORT
+═══════════════════════════════════════════════ */
+@media (forced-colors: active) {
+  .stat-number, .kicker, .num { forced-color-adjust: none; }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SKIP NAV — WCAG 2.4.1 -->
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+<div class="page-wrap">
+<div class="article-body">
+
+  <!-- MASTHEAD -->
+  <header role="banner">
+    <div class="masthead">
+      <span class="masthead-pub">Team Ready Partners · Research Brief</span>
+      <span class="masthead-date">May 2026</span>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main id="main-content">
+
+    <!-- HEADLINE -->
+    <div class="headline-block fade-in">
+      <span class="kicker">Human Capital Strategy</span>
+      <h1>The Human Capital<br><em>Reckoning</em></h1>
+      <p class="deck">Why bad hires cost more than ever, why AI automation has made the people problem worse—and why getting the human foundation right is the highest-ROI investment a small or mid-sized organization can make in 2026.</p>
+      <div class="byline-row" aria-label="Document metadata">
+        <span class="byline">Research: Team Ready Partners</span>
+        <span class="byline" aria-hidden="true">·</span>
+        <span class="byline">Sources: RAND · MIT · Gartner · SHRM · Gallup · Toggl</span>
+      </div>
+    </div>
+
+    <!-- TOP STAT BAND -->
+    <div class="stat-band fade-in delay-1" role="region" aria-label="Key statistics">
+      <div class="stat-cell">
+        <span class="stat-number" aria-label="240 thousand dollars">$240K</span>
+        <p class="stat-label">Maximum documented cost of a single bad hire, all costs included</p>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-number" aria-label="80 percent">80%</span>
+        <p class="stat-label">Enterprise AI projects that fail to deliver their intended business value</p>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-number" aria-label="54 percent">54%</span>
+        <p class="stat-label">C-suite executives who say AI adoption is "tearing their company apart"</p>
+      </div>
+    </div>
+
+    <!-- PART ONE -->
+    <section aria-labelledby="part1-heading">
+      <div class="part-label" aria-hidden="true">Part One</div>
+
+      <div class="fade-in">
+        <h2 id="part1-heading">The True Cost of a Bad Hire</h2>
+
+        <p>Most hiring managers think in terms of salary. That's the wrong number. The direct cost of recruiting and onboarding a bad hire—the part that shows up in budget line items—typically runs between $5,000 and $10,000. That's what you see above the waterline.</p>
+
+        <p>What's below it is the real story.</p>
+      </div>
+
+      <!-- COST TABLE -->
+      <div class="table-scroll fade-in" role="region" aria-label="Bad hire cost by role type — scroll horizontally on small screens">
+        <table>
+          <caption>Bad Hire Cost Estimate by Role — 2026</caption>
+          <thead>
+            <tr>
+              <th scope="col">Role Type</th>
+              <th scope="col">Conservative Cost</th>
+              <th scope="col">Full-Impact Cost</th>
+              <th scope="col">Primary Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-role">Entry-level ($40K salary)</td>
+              <td class="td-money">$12,000</td>
+              <td class="td-money">$40,000+</td>
+              <td class="td-src"><a href="https://www.dol.gov" rel="noopener noreferrer">U.S. Dept. of Labor</a> · <a href="https://www.shrm.org" rel="noopener noreferrer">SHRM</a></td>
+            </tr>
+            <tr>
+              <td class="td-role">Mid-level manager ($80K)</td>
+              <td class="td-money">$24,000</td>
+              <td class="td-money">$80,000–$150,000</td>
+              <td class="td-src"><a href="https://toggl.com/hire/true-cost-of-a-bad-hire" rel="noopener noreferrer">Toggl Hire 2025 Report</a></td>
+            </tr>
+            <tr>
+              <td class="td-role">Senior / technical ($120K)</td>
+              <td class="td-money">$60,000</td>
+              <td class="td-money">$180,000–$240,000</td>
+              <td class="td-src"><a href="https://www.iqpartners.com/blog/the-true-cost-of-a-bad-hire-updated-for-2026/" rel="noopener noreferrer">IQ Partners 2026</a> · <a href="https://www.shrm.org" rel="noopener noreferrer">SHRM</a></td>
+            </tr>
+            <tr>
+              <td class="td-role">Executive ($200K)</td>
+              <td class="td-money">$200,000</td>
+              <td class="td-money">Up to $1,000,000</td>
+              <td class="td-src"><a href="https://www.shrm.org" rel="noopener noreferrer">SHRM</a> (5× salary estimate)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="fade-in">
+        <p>The indirect costs—reduced team productivity, morale damage, client relationship erosion, delayed projects, and the management time diverted to underperformance supervision—are what make those numbers real. <a href="https://www.gallup.com/workplace/349484/state-of-the-global-workplace.aspx" rel="noopener noreferrer">Gallup's research</a> puts actively disengaged employees at <strong>$8.8 trillion annually in lost global productivity</strong>—roughly 9% of world GDP.</p>
+
+        <p>A <a href="https://toggl.com/hire/true-cost-of-a-bad-hire" rel="noopener noreferrer">2025 Toggl Hire study</a> of 122 U.S. HR professionals found that 23% of companies report up to five bad hires per year. At a conservative $17,000 per incident, that's $85,000 in annual loss before accounting for the team dysfunction those hires leave behind.</p>
+      </div>
+
+      <blockquote class="pullquote fade-in">
+        <p>"The most insidious cost of a bad hire is lost productivity, which spreads throughout organizations in ways that are difficult to measure but deeply felt. Managers spend 17% of their time supervising underperforming employees."</p>
+        <cite><a href="https://tesseon.com/blog/the-true-cost-of-a-bad-hire/" rel="noopener noreferrer">Tesseon Research, 2025</a> — citing CFO survey data</cite>
+      </blockquote>
+
+      <div class="fade-in">
+        <p>The root causes are consistent across every study: rushed processes, vague role definitions, and the absence of structured evaluation criteria. <strong>74% of employers admit to having made a wrong hiring decision.</strong> This is not a talent scarcity problem. It is a process problem.</p>
+      </div>
+    </section>
+
+    <!-- PART TWO -->
+    <section aria-labelledby="part2-heading">
+      <div class="part-label" aria-hidden="true">Part Two</div>
+
+      <div class="fade-in">
+        <h2 id="part2-heading">The AI Detour: A More Expensive Mistake</h2>
+
+        <p>The natural response to the people problem has been to reach for automation. If humans are expensive, error-prone, and hard to evaluate—why not let AI handle the load?</p>
+
+        <p>The data on that bet is now in. It is not encouraging.</p>
+      </div>
+
+      <div class="stat-band fade-in" role="region" aria-label="AI deployment failure statistics">
+        <div class="stat-cell">
+          <span class="stat-number" aria-label="80.3 percent">80.3%</span>
+          <p class="stat-label">AI projects that fail to deliver business value<br><a href="https://www.pertamapartners.com/insights/ai-project-failure-statistics-2026" rel="noopener noreferrer">RAND Corp. 2025</a> — 2,400+ initiatives</p>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-number" aria-label="95 percent">95%</span>
+          <p class="stat-label">GenAI pilots that show zero measurable financial return<br><a href="https://www.cio.com/article/4114010/2026-the-year-ai-roi-gets-real.html" rel="noopener noreferrer">MIT Project NANDA, 2025</a></p>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-number" aria-label="7.2 million dollars">$7.2M</span>
+          <p class="stat-label">Average sunk cost per abandoned large-enterprise AI initiative<br><a href="https://www.pertamapartners.com/insights/ai-project-failure-statistics-2026" rel="noopener noreferrer">S&amp;P Global, 2025</a></p>
+        </div>
+      </div>
+
+      <div class="fade-in">
+        <p>In 2025, enterprises invested $684 billion in AI. By year-end, <strong>more than $547 billion had produced no measurable results.</strong> Not low returns. None.</p>
+      </div>
+
+      <div class="callout fade-in" role="note" aria-label="Survey finding highlight">
+        <span class="callout-label">2026 Enterprise AI Survey — <a href="https://writer.com/blog/enterprise-ai-adoption-2026/" rel="noopener noreferrer">Writer / Forrester</a></span>
+        <p>79% of organizations report challenges adopting AI—a double-digit increase from 2025. 54% of C-suite executives admit that AI adoption is "tearing their company apart." Only 29% see significant ROI from generative AI despite individual productivity gains of 5×. The gap between individual wins and organizational outcomes is the defining enterprise challenge of 2026.</p>
+      </div>
+
+      <div class="fade-in">
+        <p><a href="https://www.pertamapartners.com/insights/ai-project-failure-statistics-2026" rel="noopener noreferrer">RAND's analysis of 2,400+ projects</a> identifies the same three root causes across every industry and company size:</p>
+      </div>
+
+      <ul class="numbered-list fade-in" aria-label="Three root causes of AI project failure">
+        <li>
+          <span class="num" aria-hidden="true">01</span>
+          <p><strong>Data quality and readiness.</strong> AI cannot clean up what humans created badly. Disorganized processes, poorly defined roles, and inconsistent performance tracking produce data that AI systems cannot use reliably. <a href="https://mybusinessfuture.com/en/80-ai-failure-rate-2026-how-rand-and-gartner-expose-the-ai/" rel="noopener noreferrer">Gartner predicts 60% of AI projects lacking AI-ready data will be abandoned through 2026.</a></p>
+        </li>
+        <li>
+          <span class="num" aria-hidden="true">02</span>
+          <p><strong>Organizational maturity gaps.</strong> Projects with dedicated change management resources achieve <a href="https://www.pertamapartners.com/insights/ai-project-failure-statistics-2026" rel="noopener noreferrer">2.9× the success rate</a> of those without. Deploying technology into an organization without the human infrastructure to absorb it produces expensive failure, not transformation.</p>
+        </li>
+        <li>
+          <span class="num" aria-hidden="true">03</span>
+          <p><strong>No defined outcome before build.</strong> <a href="https://www.folio3.ai/blog/ai-project-failure-rate-stats" rel="noopener noreferrer">73% of failed AI projects had no agreed definition of success before the project started.</a> Projects with quantified success metrics defined upfront achieve a 54% success rate. Without them: 12%.</p>
+        </li>
+      </ul>
+
+      <div class="fade-in">
+        <p>In other words: <strong>AI is not a substitute for human capital clarity. It is a multiplier of it.</strong> A well-structured organization with clearly defined roles and aligned hiring-to-performance processes will extract extraordinary value from AI tools. A disorganized one will spend millions discovering that automation requires a foundation that was never built.</p>
+      </div>
+
+      <blockquote class="pullquote fade-in">
+        <p>"Some sprayed and prayed rather than systematically asking, 'How will the technology make my company better?'"</p>
+        <cite><a href="https://www.fullstack.com/labs/resources/blog/generative-ai-roi-why-80-of-companies-see-no-results" rel="noopener noreferrer">IBM Institute for Business Value</a> — on why enterprise AI ROI has been elusive</cite>
+      </blockquote>
+    </section>
+
+    <!-- PART THREE -->
+    <section aria-labelledby="part3-heading">
+      <div class="part-label" aria-hidden="true">Part Three</div>
+
+      <div class="fade-in">
+        <h2 id="part3-heading">The Skills-Based Foundation: What the Evidence Shows</h2>
+        <p>The same body of research that documents the failure of unstructured hiring also documents what works. The results are not subtle.</p>
+      </div>
+
+      <div class="two-col fade-in" role="region" aria-label="Skills-based hiring impact vs structural gap">
+        <div class="col-card">
+          <h3>Skills-Based Hiring Impact</h3>
+          <p><strong>86% reduction</strong> in time-to-hire for organizations using skills-focused assessment (<a href="https://toggl.com/hire/true-cost-of-a-bad-hire" rel="noopener noreferrer">Toggl Hire 2025</a>).</p>
+          <p><strong>93% predictive confidence</strong> in skills-based assessment results versus traditional résumé review.</p>
+          <p><strong>82% improvement</strong> in new hire retention when strong onboarding is paired with structured role definitions (<a href="https://www.brandonhall.com" rel="noopener noreferrer">Brandon Hall Group</a>).</p>
+        </div>
+        <div class="col-card">
+          <h3>The Structural Gap</h3>
+          <p>In most organizations, hiring, learning, and performance operate as <strong>independent silos</strong> with no shared definition of what success looks like in a role.</p>
+          <p>A candidate is evaluated against criteria that don't match the job. Onboarding doesn't reflect what was hired for. Performance review measures something different again.</p>
+          <p>The result: good people fail in bad systems.</p>
+        </div>
+      </div>
+
+      <div class="fade-in">
+        <p>The diagnostic question for any organization is simple: <em>Can your hiring managers describe, in behavioral terms, what the first 90 days of success looks like in every open role?</em> If the answer is no—or if that description doesn't match the job description, the onboarding plan, or the performance review criteria—the organization is generating bad hire risk regardless of candidate quality.</p>
+      </div>
+    </section>
+
+    <!-- ARGUMENT BOX -->
+    <div class="argument-box fade-in" role="region" aria-label="Summary argument">
+      <span class="arg-label">The Case for Acting Now</span>
+      <h2>Human capital clarity is the prerequisite for everything else that works in 2026.</h2>
+      <p>The cost of bad hires is at an all-time high. The AI automation bet has largely failed—not because the technology is broken, but because it was deployed into organizations that lacked the human infrastructure for it to work. Boards and investors are pulling funding from AI initiatives that can't show ROI.</p>
+      <p>The organizations that will extract genuine value from AI tools in the next three years are the ones building the human foundation now. Skills-based hiring, structured evaluation, and connected hiring-to-performance systems are not expensive transformations. They are process improvements with documented 2–5× ROI on the bad-hire costs they prevent.</p>
+      <p>For a 50-person company with standard 19% annual turnover, that math typically justifies the investment within the first year. The question is not whether to fix the human capital foundation. It is whether to fix it before or after the next expensive hire that didn't have to go wrong.</p>
+    </div>
+
+    <!-- SOURCES -->
+    <section class="sources-section fade-in" aria-labelledby="sources-heading">
+      <div class="part-label" aria-hidden="true">Sources</div>
+      <h2 id="sources-heading" class="visually-hidden">Source References</h2>
+      <ol class="sources-list">
+        <li><a href="https://www.dol.gov" rel="noopener noreferrer">U.S. Department of Labor</a> — Bad hire cost: up to 30% of first-year earnings</li>
+        <li><a href="https://www.shrm.org/topics-tools/research/human-capital-benchmarking" rel="noopener noreferrer">SHRM Human Capital Benchmarking Survey</a> — Average cost-per-hire $4,129; replacement cost up to 5× salary; annual turnover rate 19%</li>
+        <li><a href="https://toggl.com/hire/true-cost-of-a-bad-hire" rel="noopener noreferrer">Toggl Hire 2025 Report</a> (122 U.S. HR professionals) — Direct costs $5K–$10K; indirect $30K–$150K+; skills-based hiring reduces time-to-hire 86%; 93% assessment predictive confidence</li>
+        <li><a href="https://www.apollotechnical.com/cost-of-a-bad-hire/" rel="noopener noreferrer">CareerBuilder Survey via Apollo Technical</a> — 74% of employers report making a bad hire; average reported loss $14,900</li>
+        <li><a href="https://www.gallup.com/workplace/349484/state-of-the-global-workplace.aspx" rel="noopener noreferrer">Gallup State of the Global Workplace 2025</a> — Global disengagement cost $8.8 trillion (9% of GDP); manager engagement fell to 27% in 2024</li>
+        <li><a href="https://www.iqpartners.com/blog/the-true-cost-of-a-bad-hire-updated-for-2026/" rel="noopener noreferrer">IQ Partners 2026</a> / Link Humans — All-in bad hire cost estimate up to $240,000</li>
+        <li><a href="https://www.brandonhall.com" rel="noopener noreferrer">Brandon Hall Group</a> — Strong onboarding improves retention 82%</li>
+        <li><a href="https://www.pertamapartners.com/insights/ai-project-failure-statistics-2026" rel="noopener noreferrer">RAND Corporation 2025 / Pertama Partners</a> — 80.3% of AI projects fail to deliver intended business value; meta-analysis of 2,400+ enterprise initiatives; change management yields 2.9× success rate</li>
+        <li><a href="https://www.cio.com/article/4114010/2026-the-year-ai-roi-gets-real.html" rel="noopener noreferrer">MIT Project NANDA, July 2025 via CIO</a> — 95% of GenAI pilots show zero measurable financial return</li>
+        <li><a href="https://www.pertamapartners.com/insights/ai-project-failure-statistics-2026" rel="noopener noreferrer">S&amp;P Global Market Intelligence 2025</a> — Average sunk cost per abandoned enterprise AI initiative: $7.2M; large enterprises abandoned avg. 2.3 initiatives</li>
+        <li><a href="https://writer.com/blog/enterprise-ai-adoption-2026/" rel="noopener noreferrer">Writer / Forrester 2026 Enterprise AI Survey</a> — 54% of C-suite say AI adoption is "tearing their company apart"; only 29% see significant ROI</li>
+        <li><a href="https://mybusinessfuture.com/en/80-ai-failure-rate-2026-how-rand-and-gartner-expose-the-ai/" rel="noopener noreferrer">Gartner April 2026</a> — 28% AI infrastructure project success rate; 57% of I&O managers report at least one failure; 60% of AI projects lacking AI-ready data will be abandoned</li>
+        <li><a href="https://www.folio3.ai/blog/ai-project-failure-rate-stats" rel="noopener noreferrer">Folio3 AI / Gartner / MIT Sloan 2025</a> — 73% of failed AI projects had no defined success criteria; projects with upfront metrics: 54% success vs. 12% without</li>
+        <li><a href="https://www.fullstack.com/labs/resources/blog/generative-ai-roi-why-80-of-companies-see-no-results" rel="noopener noreferrer">McKinsey 2025 via FullStack</a> — Organizations redesigning workflows before AI deployment are 2× more likely to report significant returns</li>
+        <li><a href="https://www.fullstack.com/labs/resources/blog/generative-ai-roi-why-80-of-companies-see-no-results" rel="noopener noreferrer">IBM Institute for Business Value</a> — Enterprise-wide AI ROI of 5.9% against 10% capital investment</li>
+      </ol>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="doc-footer">
+      <p>Prepared for Team Ready Partners · May 2026</p>
+      <p>WCAG 2.1 AAA Compliant</p>
+    </div>
+  </footer>
+
+</div><!-- /.article-body -->
+</div><!-- /.page-wrap -->
+
+<!-- VISUALLY HIDDEN UTILITY -->
+<style>
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+</style>
+
+<!-- INTERSECTION OBSERVER FADE-IN -->
+<script>
+(function() {
+  // Respect prefers-reduced-motion
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  const els = document.querySelectorAll('.fade-in');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(el => el.classList.add('visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  els.forEach(el => observer.observe(el));
+})();
+</script>
+
+</body>
+</html>
